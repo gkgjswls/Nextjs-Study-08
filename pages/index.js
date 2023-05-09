@@ -10,7 +10,16 @@ export default function Home() {
 
     const enteredEmail = emailInputRef.current.value
     const enteredFeedback = feedbackInputRef.current.value
-    
+    const reqBody = {email: enteredEmail, feedback: enteredFeedback}
+    fetch('/api/feedback',{
+      method: 'POST',
+      body: JSON.stringify(reqBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response)=>response.json())
+    .then(console.log)
   }
   return (
     <div>
