@@ -1,7 +1,9 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import classes from './index.module.css'
 
 export default function Home() {
+  const [feedback, setFeedback] = useState([]);
+  const [modal,setModal] = useState(false)
   const emailInputRef = useRef()
   const feedbackInputRef = useRef()
 
@@ -10,10 +12,9 @@ export default function Home() {
 
     const enteredEmail = emailInputRef.current.value
     const enteredFeedback = feedbackInputRef.current.value
-    if(enteredEmail || enteredFeedback === ''){
-
-      return window.alert('필요한 정보가 전부 입력되지않았습니다.')
-    }
+    console.log(enteredEmail)
+    console.log(enteredFeedback)
+ 
     const reqBody = {email: enteredEmail, feedback: enteredFeedback}
     fetch('/api/feedback',{
       method: 'POST',
@@ -24,6 +25,17 @@ export default function Home() {
     })
     .then((response)=>response.json())
     .then(console.log)
+  }
+  const getFeedbackHandler = (e) =>{
+
+    e.preventDefault();
+    if(modal){
+      setModal(!modal)
+    }
+    fetch('/api/feedback')
+    .then((response)=>response.json())
+    .then((data)=>setFeedback(data.feedback))
+    .then(setModal(!modal))
   }
   return (
     <div className={classes.body}>
@@ -38,6 +50,13 @@ export default function Home() {
         </div>
         <button className={classes.btn}>Send Feedback</button>
       </form>
+      <hr/>
+      <button className={classes.btn} onClick={getFeedbackHandler}>Show Feedback</button>
+      {modal? <ul>
+        {feedback.map((feedback)=> <li key={feedback.id}>{feedback.text}</li>)}
+      </ul> : null}
+      
     </div>
+
   )
 }
