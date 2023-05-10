@@ -52,9 +52,9 @@ export default function Home() {
       </form>
       <hr/>
       <button className={classes.btn} onClick={getFeedbackHandler}>Show Feedback</button>
-      {modal? <ul>
+      {modal&& <ul>
         {feedback.map((feedback)=> <li key={feedback.id}>{feedback.text}</li>)}
-      </ul> : null}
+      </ul>}
       
     </div>
 
