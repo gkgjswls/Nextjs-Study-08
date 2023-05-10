@@ -1,0 +1,46 @@
+.body{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.FormWrapper {
+  width: 300px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Email{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  
+}
+.Email label{
+  font-weight: bolder;
+}
+.Feedback{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+
+
+}
+.Feedback label{
+  font-weight: bolder;
+
+}
+.btn{
+  font-size: 1rem;
+  width: 150px;
+  height: 30px;
+  border-radius: 15px;
+}
+.btn:hover{
+  background-color: black;
+  color: white;
+  font-weight: bolder;
+}
